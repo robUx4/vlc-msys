@@ -74,8 +74,7 @@ Then go in **in `<VLC>/contrib`** you create a folder where you will build and t
 ```
 mkdir win64
 cd win64
-../bootstrap
-PKG_CONFIG_PATH="" --host=x86_64-w64-mingw32
+../bootstrap --host=x86_64-w64-mingw32
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -84,8 +83,7 @@ For **X86**:
 ```
 mkdir win32
 cd win32
-../bootstrap
-PKG_CONFIG_PATH="" --host=i686-w64-mingw32
+../bootstrap --host=i686-w64-mingw32
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
