@@ -97,9 +97,9 @@ Once all the contribs are built you will have all the libraries in **`<path/to/v
 
 In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) you first need to boostrap the repository so it can be built. 
 
-First Make sure you have `<path/to/vlc/root/extra/tools/bin>` in your `PATH`:
+First Make sure you have `<path/to/vlc/root/extra/tools/build/bin>` in your `PATH`:
 ```
-export PATH=</absolute/path/to/vlc/root>/extra/tools/bin:$PATH
+export PATH=</absolute/path/to/vlc/root>/extra/tools/build/bin:$PATH
 ```
 
 And boostrap:
