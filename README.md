@@ -30,7 +30,7 @@ You don't need this if you are using a [custom LLVM-clang toolchain](http://mart
 * `x86_64-w64-mingw32-gcc`
 * `i686-w64-mingw32-gcc`
 
-So you need either these packages for **AMD64**:
+So you need either these packages for **X64**:
 ```
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-headers-git mingw-w64-x86_64-tools-git mingw-w64-x86_64-make mingw-w64-x86_64-libwinpthreads-git mingw-w64-x86_64-gdb mingw-w64-x86_64-nasm
 ```
@@ -70,7 +70,7 @@ or for **X86**
 export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-mingw32-gcc-ar.exe'
 ```
 
-Then go in **in `<VLC>/contrib`** you create a folder where you will build and then build all of them. For **AMD64**:
+Then go in **in `<VLC>/contrib`** you create a folder where you will build and then build all of them. For **X64**:
 ```
 mkdir win64
 cd win64
