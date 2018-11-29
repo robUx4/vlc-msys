@@ -116,7 +116,7 @@ export CONFIG_SITE=/dev/null
 ```
 or for **X86**
 ```
-export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-mingw32-gcc-ar.exe'
+export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-w64-mingw32-gcc-ar.exe'
 export CONFIG_SITE=/dev/null
 ```
 
