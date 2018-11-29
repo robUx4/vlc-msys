@@ -123,12 +123,12 @@ export CONFIG_SITE=/dev/null
 Then you configure the build:
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --prefix=`realpath ./_win`
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
 ```
 or for **X86**
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --prefix=`realpath ./_win`
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
 ```
 
 And you're ready to build
