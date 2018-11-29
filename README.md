@@ -1,6 +1,6 @@
 # How To build VLC in msys2
 
-Building VLC on Windows is done using [msys2](http://www.msys2.org/). You need to install it first (x86_64 or i686, I use the former).
+Building VLC on Windows is done using [msys2](http://www.msys2.org/). You need to install it first (X64 or X86, I use the former).
 
 Then building is done in 3 steps:
 * The build tools
@@ -32,11 +32,11 @@ You don't need this if you are using a [custom LLVM-clang toolchain](http://mart
 
 So you need either these packages for **X64**:
 ```
-pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-headers-git mingw-w64-x86_64-tools-git mingw-w64-x86_64-make mingw-w64-x86_64-libwinpthreads-git mingw-w64-x86_64-gdb mingw-w64-x86_64-nasm
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-headers-git mingw-w64-x86_64-tools-git mingw-w64-x86_64-make mingw-w64-x86_64-libwinpthread-git mingw-w64-x86_64-gdb mingw-w64-x86_64-nasm
 ```
 Or for **X86**:
 ```
-pacman -S mingw-w64-i686-gcc mingw-w64-i686-headers-git mingw-w64-i686-tools-git mingw-w64-i686-make mingw-w64-i686-libwinpthreads-git mingw-w64-i686-gdb mingw-w64-i686-nasm
+pacman -S mingw-w64-i686-gcc mingw-w64-i686-headers-git mingw-w64-i686-tools-git mingw-w64-i686-make mingw-w64-i686-libwinpthread-git mingw-w64-i686-gdb mingw-w64-i686-nasm
 ```
 
 If you plan to build libbluray with menu support you will also need to [install a Java environment](http://jdk.java.net/java-se-ri/8) and have `JAVA_HOME` set properly. **It should not contain spaces otherwise it won't be used correctly by msys2.**
@@ -95,7 +95,7 @@ Once all the contribs are built you will have all the libraries in **`<path/to/v
 
 ## Building VLC
 
-In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) you first need to boostrap the repository so it can be built. 
+In a `mingw64.exe` shell (or `mingw86.exe` for X86 output) you first need to boostrap the repository so it can be built. 
 
 First Make sure you have `<path/to/vlc/root/extra/tools/build/bin>` in your `PATH`:
 ```
