@@ -51,7 +51,7 @@ git clone git://git.videolan.org/vlc.git
 
 ## Build Tools
 
-The first step in building VLC is building build tools that are  missing or have a different version. Go **in `<VLC>/extra/tools`** and do the following in the shell:
+The first step in building VLC is building build tools that are  missing or have a different version. Go **in `<path/to/vlc/root>/extra/tools`** and do the following in the shell:
 ```
 export PATH=`cygpath -a build/bin`:$PATH
 ./bootstrap
@@ -70,7 +70,7 @@ or for **X86**
 export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-mingw32-gcc-ar.exe'
 ```
 
-Then go in **in `<VLC>/contrib`** you create a folder where you will build and then build all of them. For **X64**:
+Then go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **X64**:
 ```
 mkdir win64
 cd win64
@@ -90,7 +90,7 @@ PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 
 This will take a **long** time. You can use more threads to make it faster by adding `-j4` to the make command. You can adjust the number to amount of threads you want to use.
 
-Once all the contribs are built you will have all the libraries in **`<VLC>/contrib/x86_64-w64-mingw32/`** (or **`<VLC>/contrib/i686-w64-mingw32/`**).
+Once all the contribs are built you will have all the libraries in **`<path/to/vlc/root>/contrib/x86_64-w64-mingw32/`** (or **`<path/to/vlc/root>/contrib/i686-w64-mingw32/`**).
 
 
 ## Building VLC
@@ -99,7 +99,7 @@ In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) you first need to bo
 
 First Make sure you have `<path/to/vlc/root/extra/tools/bin>` in your `PATH`:
 ```
-export PATH=<path/to/vlc/root>/extra/tools/bin:$PATH
+export PATH=</absolute/path/to/vlc/root>/extra/tools/bin:$PATH
 ```
 
 And boostrap:
@@ -123,7 +123,12 @@ export CONFIG_SITE=/dev/null
 Then you configure the build:
 ```
 cd <build_folder>
-<path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --prefix=`realpath ./_win`
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --prefix=`realpath ./_win`
+```
+or for **X86**
+```
+cd <build_folder>
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --prefix=`realpath ./_win`
 ```
 
 And you're ready to build
