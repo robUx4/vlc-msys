@@ -1,6 +1,6 @@
 # How To build VLC in msys2
 
-Building VLC on Windows is done using [msys2](http://www.msys2.org/). You need to install it first (X64 or X86, I use the former).
+Building VLC on Windows is done using [msys2](http://www.msys2.org/). You need to install it first (x64 or x86, I use the former).
 
 Then building is done in 3 steps:
 * The build tools
@@ -30,11 +30,11 @@ You don't need this if you are using a [custom LLVM-clang toolchain](http://mart
 * `x86_64-w64-mingw32-gcc`
 * `i686-w64-mingw32-gcc`
 
-So you need either these packages for **X64**:
+So you need either these packages for **x64**:
 ```
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-headers-git mingw-w64-x86_64-tools-git mingw-w64-x86_64-make mingw-w64-x86_64-libwinpthread-git mingw-w64-x86_64-gdb mingw-w64-x86_64-nasm
 ```
-Or for **X86**:
+Or for **x86**:
 ```
 pacman -S mingw-w64-i686-gcc mingw-w64-i686-headers-git mingw-w64-i686-tools-git mingw-w64-i686-make mingw-w64-i686-libwinpthread-git mingw-w64-i686-gdb mingw-w64-i686-nasm
 ```
@@ -65,12 +65,12 @@ In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to se
 ```
 export CC='x86_64-w64-mingw32-gcc'; export CXX='x86_64-w64-mingw32-g++'; export AR='x86_64-w64-mingw32-gcc-ar.exe'
 ```
-or for **X86**
+or for **x86**
 ```
 export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-mingw32-gcc-ar.exe'
 ```
 
-Then go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **X64**:
+Then go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **x64**:
 ```
 mkdir win64
 cd win64
@@ -79,7 +79,7 @@ PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
 
-For **X86**:
+For **x86**:
 ```
 mkdir win32
 cd win32
@@ -95,7 +95,7 @@ Once all the contribs are built you will have all the libraries in **`<path/to/v
 
 ## Building VLC
 
-In a `mingw64.exe` shell (or `mingw86.exe` for X86 output) you first need to boostrap the repository so it can be built. 
+In a `mingw64.exe` shell (or `mingw86.exe` for x86 output) you first need to boostrap the repository so it can be built. 
 
 First Make sure you have `<path/to/vlc/root/extra/tools/build/bin>` in your `PATH`:
 ```
@@ -114,7 +114,7 @@ Then can create a folder anywhere you want and build VLC in it. First make sure 
 export CC='x86_64-w64-mingw32-gcc'; export CXX='x86_64-w64-mingw32-g++'; export AR='x86_64-w64-mingw32-gcc-ar.exe'
 export CONFIG_SITE=/dev/null
 ```
-or for **X86**
+or for **x86**
 ```
 export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-w64-mingw32-gcc-ar.exe'
 export CONFIG_SITE=/dev/null
@@ -125,7 +125,7 @@ Then you configure the build:
 cd <build_folder>
 <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
 ```
-or for **X86**
+or for **x86**
 ```
 cd <build_folder>
 <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
