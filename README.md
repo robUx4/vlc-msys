@@ -67,7 +67,7 @@ export CC='x86_64-w64-mingw32-gcc'; export CXX='x86_64-w64-mingw32-g++'; export 
 ```
 or for **x86**
 ```
-export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-mingw32-gcc-ar.exe'
+export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-w64-mingw32-gcc-ar.exe'
 ```
 
 Then go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **x64**:
