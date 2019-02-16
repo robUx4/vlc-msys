@@ -65,18 +65,18 @@ Make sure it builds at least CMake. If it doesn't do it manually: `make .buildcm
 
 In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to set the environment variable to set the compiler. It may not be found correctly by `make` and `CMake` otherwise:
 ```
-export CC='x86_64-w64-mingw32-gcc'; export CXX='x86_64-w64-mingw32-g++'; export AR='x86_64-w64-mingw32-gcc-ar.exe'; export RANLIB='x86_64-w64-mingw32-gcc-ranlib'
+export AR='x86_64-w64-mingw32-gcc-ar.exe'; export RANLIB='x86_64-w64-mingw32-gcc-ranlib'
 ```
 or for **x86**
 ```
-export CC='i686-w64-mingw32-gcc'; export CXX='i686-w64-mingw32-g++'; export AR='i686-w64-mingw32-gcc-ar.exe'; export RANLIB='i686-w64-mingw32-gcc-ranlib'
+export AR='i686-w64-mingw32-gcc-ar.exe'; export RANLIB='i686-w64-mingw32-gcc-ranlib'
 ```
 
 Then go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **x64**:
 ```
 mkdir win64
 cd win64
-../bootstrap --host=x86_64-w64-mingw32
+../bootstrap --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -85,10 +85,15 @@ For **x86**:
 ```
 mkdir win32
 cd win32
-../bootstrap --host=i686-w64-mingw32
+../bootstrap --host=i686-w64-mingw32 --build=i686-w64-mingw32
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
+
+
+
+> Because not all the tools of the msys2 toolchains are prefixed properly, it's better not to cross compile (from msys2 to mingw64), so we set the `host` and the `build` targets. So it is important to run the compilations in either a `mingw64.exe` shell for x86_64 or `mingw32.exe` for i686
+
 
 This will take a **long** time. You can use more threads to make it faster by adding `-j4` to the make command. You can adjust the number to amount of threads you want to use.
 
