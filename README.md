@@ -68,7 +68,7 @@ export PATH=`cygpath -a build/bin`:$PATH
 make
 ```
 
-Make sure it builds at least CMake. If it doesn't do it manually: `make .buildcmake`. This is required to have pkg-config work properly in msys2.
+Make sure it builds at least libtool. If it doesn't do it manually: `make .buildlibtool`. This is required to have llvm link properly in msys2.
 
 
 ## Contribs
