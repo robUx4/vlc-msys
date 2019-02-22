@@ -28,7 +28,7 @@ or if you plan on using the mingw32.exe
 pacman -S mingw-w64-i686-extra-cmake-modules mingw-w64-i686-python3 mingw-w64-i686-meson mingw-w64-i686-ragel
 ```
 
-Then you need to install the LLVM compiler on top from (https://github.com/mstorsjo/llvm-mingw/releases).
+Then you need to install the LLVM compiler on top from (https://github.com/mstorsjo/llvm-mingw/).
 
 For a mingw64 environment you just uncompress the latest llvm-mingw-<date>-x86_64.zip in the root of your msys2 installation.
 ```
@@ -127,4 +127,9 @@ cd <build_folder>
 And you're ready to build
 ```
 make
+```
+
+If you want to add extra flags for debugging with PDB files you should configure with the extra C/C++ flags:
+```
+CFLAGS="-g -gcodeview -O0" CXXFLAGS="-g -gcodeview -O0" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
 ```
