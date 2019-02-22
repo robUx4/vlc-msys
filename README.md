@@ -18,25 +18,32 @@ The first step after you install `msys2` is to install the basic tools and toolc
 The basic things you need can be installed with
 ```
 pacman -S make automake autoconf pkg-config libtool git patch dos2unix unzip yasm git gperf bison autogen python3 help2man
+```
+And either
+```
 pacman -S mingw-w64-x86_64-extra-cmake-modules mingw-w64-x86_64-python3 mingw-w64-x86_64-meson
 ```
-
-You will also need a compiler to build native msys2 executable:
+or if you plan on using the mingw32 environment (rather than mingw64)
 ```
-pacman -S gcc
+pacman -S mingw-w64-i686-extra-cmake-modules mingw-w64-i686-python3 mingw-w64-i686-meson
 ```
 
-You don't need this if you are using a [custom LLVM-clang toolchain](http://martin.st/temp/llvm-mingw-x86_64.zip) which comes with all the compilers you need. Otherwise you need a compiler for your target:
-* `x86_64-w64-mingw32-gcc`
-* `i686-w64-mingw32-gcc`
+Then you need to install the LLVM compiler on top from (https://github.com/mstorsjo/llvm-mingw/releases).
 
-So you need either these packages for **x64**:
+For a mingw64 environment you just uncompress the latest llvm-mingw-<date>-x86_64.zip in the root of your msys2 installation.
 ```
-pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-headers-git mingw-w64-x86_64-tools-git mingw-w64-x86_64-make mingw-w64-x86_64-libwinpthread-git mingw-w64-x86_64-gdb mingw-w64-x86_64-nasm
+wget https://github.com/mstorsjo/llvm-mingw/releases/download/20190124/llvm-mingw-20190124-x86_64.zip
+unzip llvm-mingw-20190124-x86_64.zip -d /
 ```
 Or for **x86**:
 ```
-pacman -S mingw-w64-i686-gcc mingw-w64-i686-headers-git mingw-w64-i686-tools-git mingw-w64-i686-make mingw-w64-i686-libwinpthread-git mingw-w64-i686-gdb mingw-w64-i686-nasm
+wget https://github.com/mstorsjo/llvm-mingw/releases/download/20190124/llvm-mingw-20190124-i686.zip
+unzip llvm-mingw-20190124-i686.zip -d /
+```
+
+From this point you will need to have `/llvm-mingw/bin` in you msys2 PATH:
+```
+export PATH=/llvm-mingw/bin:$PATH
 ```
 
 If you plan to build libbluray with menu support you will also need to [install a Java environment](http://jdk.java.net/java-se-ri/8) and have `JAVA_HOME` set properly. **It should not contain spaces otherwise it won't be used correctly by msys2.**
