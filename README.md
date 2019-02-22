@@ -21,11 +21,11 @@ pacman -S make automake autoconf pkg-config libtool git patch dos2unix unzip yas
 ```
 And either (if running mingw64.exe)
 ```
-pacman -S mingw-w64-x86_64-extra-cmake-modules mingw-w64-x86_64-python3 mingw-w64-x86_64-meson
+pacman -S mingw-w64-x86_64-extra-cmake-modules mingw-w64-x86_64-python3 mingw-w64-x86_64-meson mingw-w64-x86_64-ragel
 ```
 or if you plan on using the mingw32.exe
 ```
-pacman -S mingw-w64-i686-extra-cmake-modules mingw-w64-i686-python3 mingw-w64-i686-meson
+pacman -S mingw-w64-i686-extra-cmake-modules mingw-w64-i686-python3 mingw-w64-i686-meson mingw-w64-i686-ragel
 ```
 
 Then you need to install the LLVM compiler on top from (https://github.com/mstorsjo/llvm-mingw/releases).
