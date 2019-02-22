@@ -9,7 +9,7 @@ Then building is done in 3 steps:
 
 ## Msys2 Packages
 
-**It is important that you don't run `pacman -Syu` to update `msys2` to the latest packages. The current `gcc 8.2` produces VLC executables that don't run**
+Run `pacman -Syu` (twice) to update `msys2` to the latest packages.
 
 VLC uses a lot of external code. And also many different tools to build this code. A lot of these tools are common in dev environment and some are not found in msys2 or needs some patching to work with VLC.
 
