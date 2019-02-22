@@ -27,10 +27,6 @@ or if you plan on using the mingw32.exe
 ```
 pacman -S mingw-w64-i686-extra-cmake-modules mingw-w64-i686-python3 mingw-w64-i686-meson
 ```
-or if you use the bare msys2.exe environment
-```
-pacman -S cmake python3 meson
-```
 
 Then you need to install the LLVM compiler on top from (https://github.com/mstorsjo/llvm-mingw/releases).
 
