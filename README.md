@@ -50,7 +50,7 @@ If you plan to build libbluray with menu support you will also need to [install 
 
 ## Get the VLC sources
 
-In a `mingw64.exe` shell (or `mingw86.exe` if you plan on build x86 binaries) you clone the VLC repository:
+In a `mingw64.exe` shell (or `mingw32.exe` if you plan on build x86 binaries) you clone the VLC repository:
 ```
 git clone git://git.videolan.org/vlc.git
 ```
