@@ -69,6 +69,16 @@ Make sure it builds at least libtool. If it doesn't do it manually: `make .build
 
 ## Contribs
 
+In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to set the environment variable to set the compiler. It may not be found correctly by `make`, `CMake` or `meson` otherwise:
+```
+export CC="`which x86_64-w64-mingw32-gcc`"; export CXX="`which x86_64-w64-mingw32-g++`"; export AR="`which x86_64-w64-mingw32-ar`"; export STRIP="`which x86_64-w64-mingw32-strip`"
+```
+or for **x86**
+```
+export CC="`which i686-w64-mingw32-gcc`"; export CXX="`which i686-w64-mingw32-g++`"; export AR="`which i686-w64-mingw32-ar`"; export STRIP="`which i686-w64-mingw32-strip`"
+```
+
+
 Go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **x64**:
 ```
 mkdir win64
