@@ -124,12 +124,13 @@ cd <build_folder>
 <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
 ```
 
+If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
+```
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
+```
+
 And you're ready to build
 ```
 make
 ```
 
-If you want to add extra flags for debugging with PDB files you should configure with the extra option:
-```
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
-```
