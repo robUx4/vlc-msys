@@ -71,11 +71,11 @@ make
 
 In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to set the environment variable to set the compiler. It may not be found correctly by `make`, `CMake` or `meson` otherwise:
 ```
-export CC="x86_64-w64-mingw32-gcc.exe"; export CXX="x86_64-w64-mingw32-g++.exe"; export AR="`which x86_64-w64-mingw32-ar`"; export STRIP="`which x86_64-w64-mingw32-strip`"
+export CC="x86_64-w64-mingw32-gcc.exe"; export CXX="x86_64-w64-mingw32-g++.exe"; export AR="x86_64-w64-mingw32-ar.exe"; export STRIP="x86_64-w64-mingw32-strip.exe"
 ```
 or for **x86**
 ```
-export CC="i686-w64-mingw32-gcc.exe"; export CXX="i686-w64-mingw32-g++.exe"; export AR="`which i686-w64-mingw32-ar`"; export STRIP="`which i686-w64-mingw32-strip`"
+export CC="i686-w64-mingw32-gcc.exe"; export CXX="i686-w64-mingw32-g++.exe"; export AR="i686-w64-mingw32-ar.exe"; export STRIP="i686-w64-mingw32-strip.exe"
 ```
 
 and the flags to make sure the APIs allowed by the Windows Store are used:
