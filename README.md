@@ -78,12 +78,17 @@ or for **x86**
 export CC="`which i686-w64-mingw32-gcc`"; export CXX="`which i686-w64-mingw32-g++`"; export AR="`which i686-w64-mingw32-ar`"; export STRIP="`which i686-w64-mingw32-strip`"
 ```
 
+and the flags to make sure the APIs allowed by the Windows Store are used:
+```
+export CFLAGS="-DWINAPI_FAMILY=WINAPI_FAMILY_PC_APP -D_WIN32_WINNT=0x0A00"; export CXXFLAGS=$CFLAGS
+```
+
 
 Go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **x64**:
 ```
 mkdir win64
 cd win64
-../bootstrap --host=x86_64-w64-mingw32
+../bootstrap --host=x86_64-w64-mingw32 --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-sdl --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-a52 --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -92,7 +97,7 @@ For **x86**:
 ```
 mkdir win32
 cd win32
-../bootstrap --host=i686-w64-mingw32
+../bootstrap --host=i686-w64-mingw32 --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-sdl --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-a52 --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
