@@ -89,7 +89,7 @@ Go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will bui
 ```
 mkdir win64
 cd win64
-../bootstrap --host=x86_64-w64-mingw32 --enable-winstore --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-a52 --disable-aribb25 --disable-sdl --disable-SDL_image --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265 --disable-tiff --disable-caca
+../bootstrap --host=x86_64-w64-mingw32 --enable-winstore --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-a52 --disable-aribb25 --disable-sdl --disable-SDL_image --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265 --disable-tiff --disable-caca --disable-gettext
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -98,7 +98,7 @@ For **x86**:
 ```
 mkdir win32
 cd win32
-../bootstrap --host=i686-w64-mingw32 --enable-winstore --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-a52 --disable-aribb25 --disable-sdl --disable-SDL_image --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265 --disable-tiff --disable-caca
+../bootstrap --host=i686-w64-mingw32 --enable-winstore --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-a52 --disable-aribb25 --disable-sdl --disable-SDL_image --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265 --disable-tiff --disable-caca --disable-gettext
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
