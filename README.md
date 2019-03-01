@@ -80,7 +80,8 @@ export CC="`which i686-w64-mingw32-gcc`"; export CXX="`which i686-w64-mingw32-g+
 
 and the flags to make sure the APIs allowed by the Windows Store are used:
 ```
-export CFLAGS="-DWINAPI_FAMILY=WINAPI_FAMILY_PC_APP -D_WIN32_WINNT=0x0A00"; export CXXFLAGS=$CFLAGS
+export CFLAGS="-DWINAPI_FAMILY=WINAPI_FAMILY_PC_APP -D_WIN32_WINNT=0x0A00 -DWINVER=0x0A00 -DWINSTORECOMPAT -D_UNICODE -DUNICODE"; export CXXFLAGS=$CFLAGS
+export LDFLAGS="-lnormaliz -lwinstorecompat -lruntimeobject"
 ```
 
 
