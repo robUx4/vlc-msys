@@ -64,7 +64,7 @@ export PATH=`cygpath -a build/bin`:$PATH
 make
 ```
 
-Make sure it builds at least `libtool` and `automake`. If it doesn't do it manually: `make .buildautomake .buildlibtool`. This is required to have llvm link properly in msys2.
+*Make sure it builds at least `libtool` and `automake`*. If it doesn't do it manually: `make .buildautomake .buildlibtool`. This is required to have llvm link properly in msys2.
 
 
 ## Contribs
