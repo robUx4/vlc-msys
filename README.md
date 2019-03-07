@@ -89,7 +89,7 @@ Go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will bui
 ```
 mkdir win64
 cd win64
-../bootstrap --host=x86_64-w64-mingw32 --prefix=`cygpath -a ../x86_64-w64-mingw32uwp` --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-a52 --disable-aribb25 --disable-sdl --disable-SDL_image --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265 --disable-tiff --disable-caca --disable-gettext --disable-cddb --disable-glslang --disable-bluray --disable-modplug
+../bootstrap --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --prefix=`cygpath -a ../x86_64-w64-mingw32uwp` --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -98,7 +98,7 @@ For **x86**:
 ```
 mkdir win32
 cd win32
-../bootstrap --host=i686-w64-mingw32 --prefix=`cygpath -a ../i686-w64-mingw32uwp` --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-a52 --disable-aribb25 --disable-sdl --disable-SDL_image --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg --disable-vncclient --disable-libplacebo --disable-libmpeg2 --disable-faad2 --disable-x264 --disable-x265 --disable-tiff --disable-caca --disable-gettext --disable-cddb --disable-glslang --disable-bluray --disable-modplug
+../bootstrap --host=i686-w64-mingw32 --build=i686-w64-mingw32 --prefix=`cygpath -a ../i686-w64-mingw32uwp` --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -132,12 +132,12 @@ export CONFIG_SITE=/dev/null
 Then you configure the build:
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-winstore-app --enable-debug --disable-nls --disable-ncurses
 ```
 or for **x86**
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-winstore-app --enable-debug --disable-nls --disable-ncurses
 ```
 
 If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
