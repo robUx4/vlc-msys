@@ -1,4 +1,4 @@
-# How To build VLC for Universal Windows in msys2 with LLVM
+# How To build libVLC for Universal Windows in msys2 with LLVM
 
 Building VLC on Windows is done using [msys2](http://www.msys2.org/). You need to install it first (x64 or x86, I use the former).
 
@@ -132,12 +132,12 @@ export CONFIG_SITE=/dev/null
 Then you configure the build:
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-winstore-app --enable-debug --disable-nls --disable-ncurses
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-winstore-app --disable-vlc --enable-debug --disable-nls --disable-ncurses
 ```
 or for **x86**
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-winstore-app --enable-debug --disable-nls --disable-ncurses
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-winstore-app --disable-vlc --enable-debug --disable-nls --disable-ncurses
 ```
 
 If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
