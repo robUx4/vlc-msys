@@ -81,7 +81,7 @@ export CC="i686-w64-mingw32-gcc.exe"; export CXX="i686-w64-mingw32-g++.exe"; exp
 and the flags to make sure the APIs allowed by the Windows Store are used:
 ```
 export CFLAGS="-DWINAPI_FAMILY=WINAPI_FAMILY_APP -D_WIN32_WINNT=0x0A00 -DWINVER=0x0A00 -DWINSTORECOMPAT -D_UNICODE -DUNICODE"; export CXXFLAGS=$CFLAGS; export CPPFLAGS=$CPPFLAGS
-export LDFLAGS="-lnormaliz -lwinstorecompat -lruntimeobject -lmincore -lvcruntime140_app"
+export LDFLAGS="-lnormaliz -lwinstorecompat -lruntimeobject -lmincore"
 ```
 
 
@@ -116,6 +116,12 @@ First Make sure you have `<path/to/vlc/root/extra/tools/build/bin>` in your `PAT
 ```
 export PATH=</absolute/path/to/vlc/root>/extra/tools/build/bin:$PATH
 ```
+
+The LDFLAGS needs to be adjusted to use `lvcruntime140_app` (contribs consider the compiler cannot create executables without it).
+```
+export LDFLAGS="-lnormaliz -lwinstorecompat -lruntimeobject -lmincore -lvcruntime140_app"
+```
+
 
 And boostrap:
 
