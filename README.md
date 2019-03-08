@@ -1,4 +1,4 @@
-# How To build VLC in msys2
+# How To build VLC in msys2 with LLVM
 
 Building VLC on Windows is done using [msys2](http://www.msys2.org/). You need to install it first (x64 or x86, I use the former).
 
