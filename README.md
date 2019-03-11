@@ -18,7 +18,7 @@ The first step after you install `msys2` is to install the basic tools and toolc
 The basic things you need can be installed with
 ```
 pacman -S make automake autoconf pkg-config libtool git patch dos2unix unzip yasm git gperf bison autogen python3 help2man
-pacman -S mingw-w64-x86_64-extra-cmake-modules mingw-w64-x86_64-python3 mingw-w64-x86_64-meson
+pacman -S mingw-w64-x86_64-pkg-config mingw-w64-x86_64-extra-cmake-modules mingw-w64-x86_64-python3 mingw-w64-x86_64-meson
 ```
 
 You will also need a compiler to build native msys2 executable:
