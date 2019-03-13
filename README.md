@@ -79,7 +79,7 @@ Go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will bui
 ```
 mkdir win64
 cd win64
-../bootstrap --host=x86_64-w64-mingw32uwp --build=x86_64-w64-mingw32 --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
+../bootstrap --host=x86_64-w64-mingw32uwp --build=x86_64-w64-mingw32 --enable-libdsm
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -88,7 +88,7 @@ For **x86**:
 ```
 mkdir win32
 cd win32
-../bootstrap --host=i686-w64-mingw32uwp --build=i686-w64-mingw32 --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
+../bootstrap --host=i686-w64-mingw32uwp --build=i686-w64-mingw32 --enable-libdsm
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
