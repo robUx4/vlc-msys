@@ -40,6 +40,8 @@ Or for **x86**:
 wget https://github.com/mstorsjo/llvm-mingw/releases/download/20190124/llvm-mingw-20190124-i686.zip
 unzip llvm-mingw-20190124-i686.zip -d /
 ```
+  
+**This documentation is based on [patches to add UWP and WinRT targets](https://github.com/robUx4/llvm-mingw/tree/uwp-winrt-2) to the toolchain**
 
 From this point you will need to have `/llvm-mingw/bin` in you msys2 PATH:
 ```
@@ -69,17 +71,16 @@ make
 
 In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to set the environment variable to set the compiler. It may not be found correctly by `make`, `CMake` or `meson` otherwise:
 ```
-export CC="x86_64-w64-mingw32-gcc.exe"; export CXX="x86_64-w64-mingw32-g++.exe"; export AR="x86_64-w64-mingw32-ar.exe"; export STRIP="x86_64-w64-mingw32-strip.exe"
+export CC="x86_64-w64-mingw32uwp-gcc"; export CXX="x86_64-w64-mingw32uwp-g++"; export AR="x86_64-w64-mingw32uwp-ar"; export STRIP="x86_64-w64-mingw32uwp-strip"
 ```
 or for **x86**
 ```
-export CC="i686-w64-mingw32-gcc.exe"; export CXX="i686-w64-mingw32-g++.exe"; export AR="i686-w64-mingw32-ar.exe"; export STRIP="i686-w64-mingw32-strip.exe"
+export CC="i686-w64-mingw32uwp-gcc"; export CXX="i686-w64-mingw32uwp-g++"; export AR="i686-w64-mingw32uwp-ar"; export STRIP="i686-w64-mingw32uwp-strip"
 ```
 
 and the flags to make sure the APIs allowed by the Windows Store are used:
 ```
-export CFLAGS="-DWINAPI_FAMILY=WINAPI_FAMILY_APP -D_WIN32_WINNT=0x0A00 -DWINVER=0x0A00 -DWINSTORECOMPAT -D_UNICODE -DUNICODE"; export CXXFLAGS=$CFLAGS; export CPPFLAGS=$CPPFLAGS
-export LDFLAGS="-lnormaliz -lwinstorecompat -lruntimeobject -lmincore"
+export LDFLAGS="-lnormaliz -lruntimeobject"
 ```
 
 
@@ -87,7 +88,7 @@ Go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will bui
 ```
 mkdir win64
 cd win64
-../bootstrap --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --prefix=`cygpath -a ../x86_64-w64-mingw32uwp` --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
+../bootstrap --host=x86_64-w64-mingw32uwp --build=x86_64-w64-mingw32 --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
@@ -96,14 +97,14 @@ For **x86**:
 ```
 mkdir win32
 cd win32
-../bootstrap --host=i686-w64-mingw32 --build=i686-w64-mingw32 --prefix=`cygpath -a ../i686-w64-mingw32uwp` --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
+../bootstrap --host=i686-w64-mingw32uwp --build=i686-w64-mingw32 --enable-d3d11 --enable-libdsm --disable-gnuv3 --disable-qt --disable-qtdeclarative --disable-qtgraphicaleffects --disable-qtquickcontrols2 --disable-qtsvg
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
 
 This will take a **long** time. You can use more threads to make it faster by adding `-j4` to the make command. You can adjust the number to amount of threads you want to use.
 
-Once all the contribs are built you will have all the libraries in **`<path/to/vlc/root>/contrib/x86_64-w64-mingw32/`** (or **`<path/to/vlc/root>/contrib/i686-w64-mingw32/`**).
+Once all the contribs are built you will have all the libraries in **`<path/to/vlc/root>/contrib/x86_64-w64-mingw32uwp/`** (or **`<path/to/vlc/root>/contrib/i686-w64-mingw32uwp/`**).
 
 
 ## Building VLC
@@ -113,11 +114,6 @@ In a `mingw64.exe` shell (or `mingw86.exe` for x86 output) you first need to boo
 First Make sure you have `<path/to/vlc/root/extra/tools/build/bin>` in your `PATH`:
 ```
 export PATH=</absolute/path/to/vlc/root>/extra/tools/build/bin:$PATH
-```
-
-The LDFLAGS needs to be adjusted to use `lvcruntime140_app` (contribs consider the compiler cannot create executables without it).
-```
-export LDFLAGS="-lnormaliz -lwinstorecompat -lruntimeobject -lmincore -lvcruntime140_app"
 ```
 
 
@@ -136,17 +132,17 @@ export CONFIG_SITE=/dev/null
 Then you configure the build:
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-winstore-app --disable-vlc --enable-debug --disable-nls --disable-ncurses
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32uwp --enable-winstore-app --disable-vlc --enable-debug --disable-nls --disable-ncurses
 ```
 or for **x86**
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-winstore-app --disable-vlc --enable-debug --disable-nls --disable-ncurses
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32uwp --enable-winstore-app --disable-vlc --enable-debug --disable-nls --disable-ncurses
 ```
 
 If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
 ```
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32uwp --enable-debug --disable-nls --disable-ncurses --enable-pdb
 ```
 
 And you're ready to build
