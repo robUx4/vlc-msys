@@ -69,16 +69,7 @@ make
 
 ## Contribs
 
-In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to set the environment variable to set the compiler. It may not be found correctly by `make`, `CMake` or `meson` otherwise:
-```
-export CC="x86_64-w64-mingw32uwp-gcc"; export CXX="x86_64-w64-mingw32uwp-g++"; export AR="x86_64-w64-mingw32uwp-ar"; export STRIP="x86_64-w64-mingw32uwp-strip"
-```
-or for **x86**
-```
-export CC="i686-w64-mingw32uwp-gcc"; export CXX="i686-w64-mingw32uwp-g++"; export AR="i686-w64-mingw32uwp-ar"; export STRIP="i686-w64-mingw32uwp-strip"
-```
-
-and the flags to make sure the APIs allowed by the Windows Store are used:
+In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to set the environment variable to set the flags to make sure the APIs allowed by the Windows Store are used:
 ```
 export LDFLAGS="-lnormaliz -lruntimeobject"
 ```
