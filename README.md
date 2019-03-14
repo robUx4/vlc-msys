@@ -117,17 +117,17 @@ export CONFIG_SITE=/dev/null
 Then you configure the build:
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/configure --host=x86_64-w64-mingw32uwp --disable-vlc --enable-debug --disable-nls
+<relative/path/to/vlc/root>/configure --host=x86_64-w64-mingw32uwp --disable-vlc --enable-debug --disable-nls --disable-ncurses
 ```
 or for **x86**
 ```
 cd <build_folder>
-<relative/path/to/vlc/root>/configure --host=i686-w64-mingw32uwp disable-vlc --enable-debug --disable-nls
+<relative/path/to/vlc/root>/configure --host=i686-w64-mingw32uwp disable-vlc --enable-debug --disable-nls --disable-ncurses
 ```
 
 If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
 ```
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32uwp --enable-debug --disable-nls --enable-pdb
+<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32uwp --enable-debug --disable-nls --disable-ncurses --enable-pdb
 ```
 
 And you're ready to build
