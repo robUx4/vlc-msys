@@ -46,7 +46,10 @@ From this point you will need to have `/llvm-mingw/bin` in you msys2 PATH:
 export PATH=/llvm-mingw/bin:$PATH
 ```
 
-If you plan to build libbluray with menu support you will also need to [install a Java environment](http://jdk.java.net/java-se-ri/8) and have `JAVA_HOME` set properly. **It should not contain spaces otherwise it won't be used correctly by msys2.**
+If you plan to build libbluray with menu support you will also need to [install a Java environment](http://jdk.java.net/java-se-ri/8) and have `JAVA_HOME` set properly. If if contains spaces you might want to add it to the PATH like this:
+```
+export PATH=$PATH:"$JAVA_HOME/bin"
+```
 
 ## Get the VLC sources
 
