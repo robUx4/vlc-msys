@@ -142,6 +142,11 @@ If you want to generate PDB files for debugging should add the extra configure o
 <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
 ```
 
+On the 3.0 branch you will need to force Vista compatibility as the configure script will detect things incorrectly:
+```
+CFLAGS="-D_WIN32_WINNT=0x0600" CXXFLAGS="-D_WIN32_WINNT=0x0600"  <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
+```
+
 And you're ready to build
 ```
 make
