@@ -104,6 +104,12 @@ This will take a **long** time. You can use more threads to make it faster by ad
 
 Once all the contribs are built you will have all the libraries in **`<path/to/vlc/root>/contrib/x86_64-w64-mingw32/`** (or **`<path/to/vlc/root>/contrib/i686-w64-mingw32/`**).
 
+If you are building the 3.0 tree you need to force Vista compatibility otherwise some configure scripts don't recognize some API's correctly.
+
+```
+CFLAGS="-D_WIN32_WINNT=0x0600" CXXFLAGS="-D_WIN32_WINNT=0x0600" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
+```
+
 
 ## Building VLC
 
@@ -144,7 +150,7 @@ If you want to generate PDB files for debugging should add the extra configure o
 
 On the 3.0 branch you will need to force Vista compatibility as the configure script will detect things incorrectly:
 ```
-CFLAGS="-D_WIN32_WINNT=0x0600" CXXFLAGS="-D_WIN32_WINNT=0x0600"  <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
+CFLAGS="-D_WIN32_WINNT=0x0600" CXXFLAGS="-D_WIN32_WINNT=0x0600" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
 ```
 
 And you're ready to build
