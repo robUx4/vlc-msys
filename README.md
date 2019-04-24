@@ -48,7 +48,7 @@ export PATH=/llvm-mingw/bin:$PATH
 
 If you plan to build libbluray with menu support you will also need to [install a Java environment](http://jdk.java.net/java-se-ri/8) and have `JAVA_HOME` set properly. If if contains spaces you might want to add it to the PATH like this:
 ```
-export PATH=$PATH:"$JAVA_HOME/bin"
+export PATH=$PATH:"`cygpath $JAVA_HOME`/bin"
 ```
 
 ## Get the VLC sources
