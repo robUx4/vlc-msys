@@ -45,7 +45,7 @@ If you plan to build libbluray with menu support you will also need to [install 
 
 In a `mingw64.exe` shell (or `mingw86.exe` if you plan on build x86 binaries) you clone the VLC repository:
 ```
-git config core.autocrlf=false
+git config --global core.autocrlf false
 git clone git://git.videolan.org/vlc.git
 ```
 
