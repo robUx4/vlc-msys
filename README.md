@@ -60,10 +60,18 @@ git clone git://git.videolan.org/vlc.git
 
 ## Build Tools
 
-The first step in building VLC is building build tools that are  missing or have a different version. Go **in `<path/to/vlc/root>/extra/tools`** and do the following in the shell:
+The first step in building VLC is building build tools that are  missing or have a different version. Create a local directory where the tools will be built:
+
 ```
-export PATH=`cygpath -a build/bin`:$PATH
-./bootstrap
+mkdir tools
+cd tools
+```
+
+And do the following in the shell:
+```
+export VLC_TOOLS="$PWD/build/bin"
+export PATH="$VLC_TOOLS":$PATH
+<path/to/vlc/extra/tools>/bootstrap
 make
 ```
 
@@ -72,43 +80,28 @@ make
 
 ## Contribs
 
-In a `mingw64.exe` shell (or `mingw86.exe` for i686 output) first you need to set the environment variable to set the compiler. It may not be found correctly by `make`, `CMake` or `meson` otherwise:
-```
-export CC="x86_64-w64-mingw32-gcc.exe"; export CXX="x86_64-w64-mingw32-g++.exe"; export AR="x86_64-w64-mingw32-ar.exe"; export STRIP="x86_64-w64-mingw32-strip"
-```
-or for **x86**
-```
-export CC="i686-w64-mingw32-gcc.exe"; export CXX="i686-w64-mingw32-g++.exe"; export AR="i686-w64-mingw32-ar.exe"; export STRIP="i686-w64-mingw32-strip"
-```
 
-
-Go in **in `<path/to/vlc/root>/contrib`** you create a folder where you will build and then build all of them. For **x64**:
+In your build root you create a folder where you will build and then build all of them. For **x64**:
 ```
-mkdir win64
-cd win64
-../bootstrap --host=x86_64-w64-mingw32
+mkdir contrib
+cd contrib
+<path/to/vlc/contrib>/bootstrap --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-pdb
 PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
-PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
+VLC_TOOLS="`cygpath -a ../tools/build/bin`" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
 
 For **x86**:
 ```
-mkdir win32
-cd win32
-../bootstrap --host=i686-w64-mingw32
-PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
-PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
+mkdir contrib
+cd contrib
+<path/to/vlc/contrib>/bootstrap --host=i686-w64-mingw32 --enable-pdb
+VLC_TOOLS="`cygpath -a ../tools/build/bin`" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
+VLC_TOOLS="`cygpath -a ../tools/build/bin`" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
 ```
 
 This will take a **long** time. You can use more threads to make it faster by adding `-j4` to the make command. You can adjust the number to amount of threads you want to use.
 
 Once all the contribs are built you will have all the libraries in **`<path/to/vlc/root>/contrib/x86_64-w64-mingw32/`** (or **`<path/to/vlc/root>/contrib/i686-w64-mingw32/`**).
-
-If you are building the 3.0 tree you need to force Vista compatibility otherwise some configure scripts don't recognize some API's correctly.
-
-```
-CFLAGS="-D_WIN32_WINNT=0x0600" CXXFLAGS="-D_WIN32_WINNT=0x0600" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
-```
 
 
 ## Building VLC
@@ -117,7 +110,7 @@ In a `mingw64.exe` shell (or `mingw86.exe` for x86 output) you first need to boo
 
 First Make sure you have `<path/to/vlc/root/extra/tools/build/bin>` in your `PATH`:
 ```
-export PATH=</absolute/path/to/vlc/root>/extra/tools/build/bin:$PATH
+export PATH=</absolute/path/to/build/dir>/tools/build/bin:$PATH
 ```
 
 And boostrap:
@@ -135,22 +128,17 @@ export CONFIG_SITE=/dev/null
 Then you configure the build:
 ```
 cd <build_folder>
-PKG_CONFIG_PATH="" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
+VLC_TOOLS="`cygpath -a ../tools/build/bin`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses
 ```
 or for **x86**
 ```
 cd <build_folder>
-PKG_CONFIG_PATH="" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --enable-debug --disable-nls --disable-ncurses
+VLC_TOOLS="`cygpath -a ../tools/build/bin`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-debug --with-contrib=contrib/i686-w64-mingw32 --disable-nls --disable-ncurses
 ```
 
 If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
 ```
-<relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
-```
-
-On the 3.0 branch you will need to force Vista compatibility as the configure script will detect things incorrectly:
-```
-CFLAGS="-D_WIN32_WINNT=0x0600" CXXFLAGS="-D_WIN32_WINNT=0x0600" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --enable-debug --disable-nls --disable-ncurses --enable-pdb
+VLC_TOOLS="`cygpath -a ../tools/build/bin`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses --enable-pdb
 ```
 
 And you're ready to build
