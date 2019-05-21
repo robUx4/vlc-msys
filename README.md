@@ -1,59 +1,31 @@
-# How To build VLC in msys2 with LLVM
+# How To build VLC in WSL with LLVM
 
-Building VLC on Windows is done using [msys2](http://www.msys2.org/). You need to install it first (x64 or x86, I use the former).
+Building VLC on Windows is done using [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10). You need to install it first (x64 or x86, I use the former).
 
 Then building is done in 3 steps:
 * The build tools
 * The contribs
 * The VLC code
 
-## Msys2 Packages
+## LLVM Packages
 
-Run `pacman -Syu` (twice) to update `msys2` to the latest packages.
+You need to install the LLVM compiler on top from (https://github.com/mstorsjo/llvm-mingw/).
 
-VLC uses a lot of external code. And also many different tools to build this code. A lot of these tools are common in dev environment and some are not found in msys2 or needs some patching to work with VLC.
-
-The first step after you install `msys2` is to install the basic tools and toolchain to be able to build anything.
-
-The basic things you need can be installed with
+You just uncompress the latest `llvm-mingw-<date>-x86_64.tar.xz` in a local folder installation.
 ```
-pacman -S make automake autoconf libtool git patch dos2unix unzip yasm nasm git gperf bison autogen python3 help2man
-```
-And either (if running mingw64.exe)
-```
-pacman -S mingw-w64-x86_64-pkg-config mingw-w64-x86_64-extra-cmake-modules mingw-w64-x86_64-python3 mingw-w64-x86_64-meson mingw-w64-x86_64-ragel
-```
-or if you plan on using the mingw32.exe
-```
-pacman -S mingw-w64-i686-pkg-config mingw-w64-i686-extra-cmake-modules mingw-w64-i686-python3 mingw-w64-i686-meson mingw-w64-i686-ragel
+wget https://github.com/mstorsjo/llvm-mingw/releases/download/20190504/llvm-mingw-20190504-ubuntu-16.04.tar.xz
+xz -d llvm-mingw-20190504-ubuntu-16.04.tar.xz
+tar xvf llvm-mingw-20190504-ubuntu-16.04.tar -C ~/
 ```
 
-Then you need to install the LLVM compiler on top from (https://github.com/mstorsjo/llvm-mingw/).
-
-For a mingw64 environment you just uncompress the latest llvm-mingw-<date>-x86_64.zip in the root of your msys2 installation.
+From this point you will need to have `~/llvm-mingw-20190504-ubuntu-16.04/bin` in you PATH:
 ```
-wget https://github.com/mstorsjo/llvm-mingw/releases/download/20190124/llvm-mingw-20190124-x86_64.zip
-unzip llvm-mingw-20190124-x86_64.zip -d /
-```
-Or for **x86**:
-```
-wget https://github.com/mstorsjo/llvm-mingw/releases/download/20190124/llvm-mingw-20190124-i686.zip
-unzip llvm-mingw-20190124-i686.zip -d /
-```
-
-From this point you will need to have `/llvm-mingw/bin` in you msys2 PATH:
-```
-export PATH=/llvm-mingw/bin:$PATH
-```
-
-If you plan to build libbluray with menu support you will also need to [install a Java environment](http://jdk.java.net/java-se-ri/8) and have `JAVA_HOME` set properly. If if contains spaces you might want to add it to the PATH like this:
-```
-export PATH=$PATH:"`cygpath $JAVA_HOME`/bin"
+export PATH="`realpath ~/llvm-mingw-20190504-ubuntu-16.04/bin`":$PATH
 ```
 
 ## Get the VLC sources
 
-In a `mingw64.exe` shell (or `mingw32.exe` if you plan on build x86 binaries) you clone the VLC repository:
+In shell you clone the VLC repository:
 ```
 git clone git://git.videolan.org/vlc.git
 ```
@@ -69,34 +41,33 @@ cd tools
 
 And do the following in the shell:
 ```
-export VLC_TOOLS="$PWD/build/bin"
+export VLC_TOOLS="$PWD"
 export PATH="$VLC_TOOLS":$PATH
-<path/to/vlc/extra/tools>/bootstrap
+<path/to/vlc/root>/extra/tools/bootstrap
 make
 ```
 
-*Make sure it builds at least `libtool` and `automake`*. If it doesn't do it manually: `make .buildautomake .buildlibtool`. This is required to have llvm link properly.
+*Make sure it builds at least `libtool`*. If it doesn't do it manually: `make .buildlibtool`. This is required to have llvm link properly.
 
 
 ## Contribs
-
 
 In your build root you create a folder where you will build and then build all of them. For **x64**:
 ```
 mkdir contrib
 cd contrib
-<path/to/vlc/contrib>/bootstrap --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-pdb
-PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
-VLC_TOOLS="`cygpath -a ../tools/build/bin`" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
+<path/to/vlc/root>/contrib/bootstrap --host=x86_64-w64-mingw32 --enable-pdb
+make fetch
+VLC_TOOLS="`realpath -a tools/build/bin`" PKG_CONFIG_PATH="" make
 ```
 
-For **x86**:
+For **x86**
 ```
 mkdir contrib
 cd contrib
-<path/to/vlc/contrib>/bootstrap --host=i686-w64-mingw32 --enable-pdb
-VLC_TOOLS="`cygpath -a ../tools/build/bin`" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make fetch
-VLC_TOOLS="`cygpath -a ../tools/build/bin`" PKG_CONFIG_PATH="" CONFIG_SITE=/dev/null make
+<path/to/vlc/root>/contrib/bootstrap --host=i686-w64-mingw32 --enable-pdb
+make fetch
+VLC_TOOLS="`realpath -a tools/build/bin`" PKG_CONFIG_PATH="" make
 ```
 
 This will take a **long** time. You can use more threads to make it faster by adding `-j4` to the make command. You can adjust the number to amount of threads you want to use.
@@ -106,9 +77,9 @@ Once all the contribs are built you will have all the libraries in **`<path/to/v
 
 ## Building VLC
 
-In a `mingw64.exe` shell (or `mingw86.exe` for x86 output) you first need to boostrap the repository so it can be built. 
+In a shell you first need to boostrap the git repository so it can be built.
 
-First Make sure you have `<path/to/vlc/root/extra/tools/build/bin>` in your `PATH`:
+First Make sure you have `</absolute/path/to/build/dir>/tools/build/bin` in your `PATH`:
 ```
 export PATH=</absolute/path/to/build/dir>/tools/build/bin:$PATH
 ```
@@ -116,29 +87,29 @@ export PATH=</absolute/path/to/build/dir>/tools/build/bin:$PATH
 And boostrap:
 
 ```
-cd <path/to/vlc/root>
-./boostrap
+(cd <path/to/vlc/root> && ./boostrap)
 ```
 
 Then can create a folder anywhere you want and build VLC in it. First make sure your environment variables are set:
 ```
-export CONFIG_SITE=/dev/null
+export VLC_TOOLS="`realpath -a tools/build/bin`"
+export PATH="$VLC_TOOLS":$PATH
 ```
 
 Then you configure the build:
 ```
 cd <build_folder>
-VLC_TOOLS="`cygpath -a ../tools/build/bin`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses
+PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses
 ```
 or for **x86**
 ```
 cd <build_folder>
-VLC_TOOLS="`cygpath -a ../tools/build/bin`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-debug --with-contrib=contrib/i686-w64-mingw32 --disable-nls --disable-ncurses
+PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/i686-w64-mingw32 --disable-nls --disable-ncurses
 ```
 
 If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
 ```
-VLC_TOOLS="`cygpath -a ../tools/build/bin`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses --enable-pdb
+PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses --enable-pdb
 ```
 
 And you're ready to build
