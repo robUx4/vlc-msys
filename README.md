@@ -20,7 +20,7 @@ tar xvf llvm-mingw-20190504-ubuntu-16.04.tar -C ~/
 
 From this point you will need to have `~/llvm-mingw-20190504-ubuntu-16.04/bin` in you PATH:
 ```
-export PATH="`realpath ~/llvm-mingw-20190504-ubuntu-16.04/bin`":$PATH
+export PATH=/usr/llvm-mingw/bin:"`realpath ~/llvm-mingw-20190504-ubuntu-16.04/bin`":$PATH
 ```
 
 ## Get the VLC sources
@@ -56,7 +56,7 @@ In your build root you create a folder where you will build and then build all o
 ```
 mkdir contrib
 cd contrib
-<path/to/vlc/root>/contrib/bootstrap --host=x86_64-w64-mingw32 --enable-pdb
+<path/to/vlc/root>/contrib/bootstrap --host=x86_64-w64-mingw32 --enable-pdb CFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'" CXXFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'"
 make fetch
 VLC_TOOLS="`realpath -a tools/build/bin`" PKG_CONFIG_PATH="" make
 ```
@@ -99,17 +99,17 @@ export PATH="$VLC_TOOLS":$PATH
 Then you configure the build:
 ```
 cd <build_folder>
-PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses
+PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses CFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'" CXXFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'"
 ```
 or for **x86**
 ```
 cd <build_folder>
-PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/i686-w64-mingw32 --disable-nls --disable-ncurses
+PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=i686-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/i686-w64-mingw32 --disable-nls --disable-ncurses CFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'" CXXFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'"
 ```
 
 If you want to generate PDB files for debugging should add the extra configure option `--enable-pdb`:
 ```
-PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses --enable-pdb
+PKG_CONFIG="`which pkg-config`" <relative/path/to/vlc/root>/extras/package/win32/configure.sh --host=x86_64-w64-mingw32 --prefix=`realpath ./_win64` --enable-debug --with-contrib=contrib/x86_64-w64-mingw32 --disable-nls --disable-ncurses --enable-pdb CFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'" CXXFLAGS="-fdebug-prefix-map='/mnt/c/'='c:/'"
 ```
 
 And you're ready to build
